@@ -41,24 +41,24 @@ namespace EndpointHandler.Core
     public abstract class EndpointHandlerBase<T1, T2, TResponse> : IEndpointHandler<T1, T2, TResponse>
     {
         public abstract TResponse Handle(T1 param1, T2 param2);
-        protected abstract void Validate(T1 param1, T2 param2);
+        protected virtual void Validate(T1 param1, T2 param2) { }
     }
 
     public abstract class EndpointHandlerBase<T1, T2, T3, TResponse> : IEndpointHandler<T1, T2, T3, TResponse>
     {
         public abstract TResponse Handle(T1 param1, T2 param2, T3 param3);
-        internal abstract void Validate(T1 param1, T2 param2, T3 param3);
+        protected virtual void Validate(T1 param1, T2 param2, T3 param3) { }
     }
 
     public abstract class EndpointHandlerBase<T1, T2, T3, T4, TResponse> : IEndpointHandler<T1, T2, T3, T4, TResponse>
     {
         public abstract TResponse Handle(T1 param1, T2 param2, T3 param3, T4 param4);
-        internal abstract void Validate(T1 param1, T2 param2, T3 param3, T4 param4);
+        protected virtual void Validate(T1 param1, T2 param2, T3 param3, T4 param4) { }
     }
 
     public abstract class EndpointHandlerBase<T1, T2, T3, T4, T5, TResponse> : IEndpointHandler<T1, T2, T3, T4, T5, TResponse>
     {
         public abstract TResponse Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5);
-        internal abstract void Validate(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5);
+        protected virtual void Validate(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) { }
     }
 }

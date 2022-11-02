@@ -19,7 +19,7 @@ namespace API.Endpoints.Customer
         [HttpGet]
         [Route("/customers")]
         [ProducesResponseType(typeof(CustomerDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Tags("Customer")]
         public override IResult Handle([FromQuery(Name = "offset")]int? offset, [FromQuery(Name = "count")]int? count)
         {
