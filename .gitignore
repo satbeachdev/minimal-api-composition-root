@@ -131,3 +131,12 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+.vs/minimal-api-composition-root/config/
+
+.vs/minimal-api-composition-root/DesignTimeBuild/
+
+.vs/minimal-api-composition-root/FileContentIndex/
+
+.vs/minimal-api-composition-root/v17/
+
+.vs/ProjectEvaluation/
