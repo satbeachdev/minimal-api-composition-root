@@ -27,7 +27,7 @@ The *WebApplicationBuilder* extension method, *AddEndpointHandlers()* is called 
 
 The *WebApplication* extension method, *MapEndpoints()* is called to create the endpoint mapping similar to the code above using the method attributes. 
 
-```
+```c#
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
