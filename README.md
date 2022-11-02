@@ -2,7 +2,7 @@
 
 In .NET 6, a new feature called Minimal APIs was introduced. This allows us to create an API with minimum code and no controller classes. The part that I did not like about was that all the examples that I found declared the handler in the API startup code as shown below. This seemed messy to me and would not scale especially once you start adding validation and error handling.
 
-```
+```c#
 // Add new customer
 app.MapPost(“/customers”, async ([FromBody] CustomerDto customerDto, [FromServices] ICustomerService customerService, HttpResponse response) =>
 {
@@ -49,7 +49,7 @@ The IEndpointHandler interfaces are a set of generic interfaces that enforce str
 
 In the example code, all the responses are IResult types.
 
-```
+```c#
     public interface IEndpointHandler<TResponse>
     {
         TResponse Handle();
@@ -85,7 +85,7 @@ In the example code, all the responses are IResult types.
 For each *IEndpointHandler* interface above there is a corresponding abstract *EndpointHandlerBase* class that implements it. In addition to the interface method, these classes also implement a *Validate()* method that can be overridden. Validation should occur before call any other services to validate the input from the client. If validation fails, a *ValidationException* should be thrown.
 
 You will notice that the single input parameter variant class has the *Validate()* method inplemented to use a *IValidator<T1>* class from [FluentValidation](https://docs.fluentvalidation.net/en/latest/) which will also be injected into the class from the DI containter.
-```
+```c#
 public abstract class EndpointHandlerBase<TResponse> : IEndpointHandler<TResponse>
     {
         public abstract TResponse Handle();
@@ -152,7 +152,7 @@ Endpoint handler classes are all derived from one of the *EndpointHandlerBase* c
 
 Below is an example of a GET API to retrieve all customers. Since this may return a large number of customers, there are paging parameters being passed into the method. There parameters are validated in the overridden *Validate()* method. 
 
-```
+```c#
  public class GetAllCustomers : EndpointHandlerBase<int?, int?, IResult>
     {
         private ICustomerService _service;
@@ -199,7 +199,7 @@ Below is an example of a GET API to retrieve all customers. Since this may retur
 ```
 The example below is for a POST API that uses a validator. Notice that the validator is injected into the constructor and the *Validate()* method is <u>not</u> overridden.
 
-```
+```c#
     public class CreateNewCustomer : EndpointHandlerBase<CreateCustomerCommand, IResult>
     {
         private ICustomerService _service;
