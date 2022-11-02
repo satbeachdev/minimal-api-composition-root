@@ -146,7 +146,7 @@ public abstract class EndpointHandlerBase<TResponse> : IEndpointHandler<TRespons
 ```
 ### Endpoint Classes ###
 
-Endpoint handler classes all derived from one of the *EndpointHandlerBase* classes. I choose to organize them on a class per HTTP verb basis. In other words there are separate handler classes for GET/POST/PUT/DELETE ans shown below. This will allow the developer to focus on the specific handler and should make testing easier.
+Endpoint handler classes are all derived from one of the *EndpointHandlerBase* classes. I choose to organize them on a class per HTTP verb basis. In other words there are separate handler classes for GET/POST/PUT/DELETE as shown below. This will allow the developer to focus on the specific handler and should make testing easier. It may also facilitate implementing the [CQRS](https://www.martinfowler.com/bliki/CQRS.html) pattern.
 
 ![Handler Organization](assets/handlers.png)
 
@@ -226,7 +226,7 @@ The example below is for a POST API that uses a validator. Notice that the valid
 
 ## CQRS ##
 
-The CQRS pattern is not implemented in this project but could easily be adapted by simply splitting the commands and queries into separate assemblies.
+The [CQRS](https://www.martinfowler.com/bliki/CQRS.html) pattern is not implemented in this project but could easily be adapted by simply splitting the commands and queries into separate assemblies.
 
 ## Validation ##
 Validation is implemented using the excellent [FluentValidation](https://docs.fluentvalidation.net/en/latest/) package for command APIs since they send a command class in the API body. Other validation is handled by overriding the **Validate** method in the handler class.
