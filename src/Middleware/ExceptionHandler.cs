@@ -1,11 +1,13 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using System.Diagnostics;
 using System.Text.Json;
 
-namespace API
+namespace Middleware
 {
     public static class ExceptionHandler
     {

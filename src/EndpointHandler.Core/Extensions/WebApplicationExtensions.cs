@@ -5,9 +5,9 @@ namespace EndpointHandler.Core.Extensions
 {
     public static class WebApplicationExtensions
     {
-        public static void MapEndpoints(this WebApplication app)
+        public static void MapEndpoints(this WebApplication app, Assembly endpointHandlerAssembly)
         {
-            foreach (var type in Assembly.GetCallingAssembly().GetTypes())
+            foreach (var type in endpointHandlerAssembly.GetTypes())
             {
                 var handlerInterface = type.GetEndpointHandlerInterface();
 
