@@ -3,20 +3,25 @@ using Models.Commands;
 using Models.Domain;
 using Models.DTOs;
 using Repositories;
+using System.Diagnostics;
 
 namespace Application.Services
 {
     public class CustomerService : ICustomerService
     {
         private readonly IRepository<Customer> _repository;
+        private ActivitySource _activitySource;
 
-        public CustomerService(IRepository<Customer> repository)
+        public CustomerService(IRepository<Customer> repository, ActivitySource activitySource)
         {
             _repository = repository;
+            _activitySource = new ActivitySource(nameof(CustomerService)); // activitySource;
         }
 
         public IEnumerable<CustomerDto>? GetAll()
         {
+            using var a = _activitySource.StartActivity("Get all customers");
+
             // Do DB stuff here (using the injected repository)
             var customers = _repository.GetAll();
 
@@ -25,6 +30,9 @@ namespace Application.Services
 
         public CustomerDto? GetById(Guid id)
         {
+            using var a = _activitySource.StartActivity("Get a specific customer by Id");
+            a.AddTag("customerId", id.ToString());
+
             // Do DB stuff here (using the injected repository)
             var customer = _repository.GetById(id);
 
@@ -33,6 +41,8 @@ namespace Application.Services
 
         public CustomerDto CreateNewCustomer(CreateCustomerCommand cmd)
         {
+            using var a = _activitySource.StartActivity("Create a new customer");
+
             var newCustomer = new Customer(Guid.NewGuid(), cmd.Name, cmd.Address, cmd.City, "Region found by lookup", cmd.PostalCode, "State found by lookup", "Country found by lookup");
 
             // Do DB stuff here (using the injected repository)
@@ -46,6 +56,9 @@ namespace Application.Services
 
         public CustomerDto? UpdateCustomer(UpdateCustomerCommand cmd)
         {
+            using var a = _activitySource.StartActivity("Update a specific customer");
+            a.AddTag("customerId", cmd.Id.ToString());
+
             var customer = _repository.GetById(cmd.Id);
 
             if (customer != null)
@@ -61,6 +74,9 @@ namespace Application.Services
 
         public CustomerDto? DeleteCustomer(DeleteCustomerCommand cmd)
         {
+            using var a = _activitySource.StartActivity("Delete a specific customer");
+            a.AddTag("customerId", cmd.CustomerId.ToString());
+
             var dto = GetById(cmd.CustomerId);
 
             if (dto != null)

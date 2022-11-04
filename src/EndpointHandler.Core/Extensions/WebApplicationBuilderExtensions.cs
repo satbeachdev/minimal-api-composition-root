@@ -6,7 +6,7 @@ namespace EndpointHandler.Core.Extensions
 {
     public static class WebApplicationBuilderExtensions
     {
-        public static void AddEndpointHandlers(this WebApplicationBuilder builder, Assembly endpointHandlerAssembly)
+        public static void AddEndpointHandlersFromAssembly(this WebApplicationBuilder builder, Assembly endpointHandlerAssembly)
         {
             foreach (var type in endpointHandlerAssembly.GetTypes())
             {
