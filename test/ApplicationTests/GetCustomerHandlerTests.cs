@@ -10,7 +10,7 @@ namespace ApplicationTests
         public void Test1()
         {
             // Arrange
-            var service = new CustomerService(new CustomerRepository());
+            var service = new CustomerService(new CustomerRepository(), new System.Diagnostics.ActivitySource("CustomerService"));
 
             // Act
             var dto = service.GetById(Guid.NewGuid());
